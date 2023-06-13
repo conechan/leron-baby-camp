@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "start": "ts-node ./index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsup ./index.ts"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +20,7 @@
     "@types/fs-extra": "^9.0.13",
     "@types/node": "^18.11.9",
     "ts-node": "^10.9.1",
+    "tsup": "^6.7.0",
     "typescript": "^4.9.3"
   }
 }

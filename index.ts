@@ -31,6 +31,9 @@ export async function main() {
     })
 
   // console.log(missLessons)
+  if (missLessons.length === 0) {
+    console.log(`everything is up-to-date!`)
+  }
 
   for (const lesson of missLessons) {
     // 创建日期文件夹
@@ -69,5 +72,6 @@ export async function main() {
         videos
       })
     )
+    console.log(`${lesson.dated} archived!`)
   }
 }
