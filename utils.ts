@@ -23,6 +23,7 @@ export interface ILesson {
   comment_info: {
     content: string
     data: ILessonData[]
+    created: string
   }
 }
 
@@ -59,6 +60,7 @@ export async function downloadAsset(url: string, dest: string) {
   } else {
     // console.log(`${url} skipped!`)
   }
+  return destFile
 }
 
 export function outputMd({

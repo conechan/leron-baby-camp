@@ -13,6 +13,7 @@
   "dependencies": {
     "create-output-stream": "^0.0.1",
     "dotenv": "^16.0.3",
+    "exiftool-vendored": "^22.0.0",
     "fs-extra": "^10.1.0",
     "got": "^11.0.0"
   },

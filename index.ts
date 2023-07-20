@@ -2,6 +2,9 @@ import { downloadAsset, getLessonData, ILessonDataType, outputMd } from './utils
 import fse from 'fs-extra'
 import path from 'path'
 import * as dotenv from 'dotenv'
+import { exiftool } from 'exiftool-vendored'
+
+// exiftool.version().then(version => console.log(`We're running ExifTool v${version}`))
 
 dotenv.config()
 
@@ -57,10 +60,24 @@ export async function main() {
     const content = lessonData.find(item => item.type === ILessonDataType.Text)?.url ?? ''
 
     for (const url of images) {
-      await downloadAsset(url, lessonPath)
+      const filePath = await downloadAsset(url, lessonPath)
+      // console.log(lesson.comment_info.created.replace(/\s/, 'T'))
+      try {
+        await exiftool.write(filePath, { AllDates: lesson.comment_info.created.replace(/\s/, 'T') })
+        fse.removeSync(filePath + '_original')
+      } catch (error) {
+        console.error(error)
+      }
+      // console.log(filePath)
     }
     for (const url of videos) {
-      await downloadAsset(url, lessonPath)
+      const filePath = await downloadAsset(url, lessonPath)
+      try {
+        await exiftool.write(filePath, { AllDates: lesson.comment_info.created.replace(/\s/, 'T') })
+        fse.removeSync(filePath + '_original')
+      } catch (error) {
+        console.error(error)
+      }
     }
 
     fse.outputFileSync(
@@ -74,4 +91,5 @@ export async function main() {
     )
     console.log(`${lesson.dated} archived!`)
   }
+  exiftool.end()
 }
