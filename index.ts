@@ -63,7 +63,10 @@ export async function main() {
       const filePath = await downloadAsset(url, lessonPath)
       // console.log(lesson.comment_info.created.replace(/\s/, 'T'))
       try {
-        await exiftool.write(filePath, { AllDates: lesson.comment_info.created.replace(/\s/, 'T') })
+        await exiftool.write(filePath, {
+          AllDates: lesson.comment_info.created.replace(/\s/, 'T'),
+          TimeZoneOffset: 8
+        })
         fse.removeSync(filePath + '_original')
       } catch (error) {
         console.error(error)
@@ -73,7 +76,10 @@ export async function main() {
     for (const url of videos) {
       const filePath = await downloadAsset(url, lessonPath)
       try {
-        await exiftool.write(filePath, { AllDates: lesson.comment_info.created.replace(/\s/, 'T') })
+        await exiftool.write(filePath, {
+          AllDates: lesson.comment_info.created.replace(/\s/, 'T'),
+          TimeZoneOffset: 8
+        })
         fse.removeSync(filePath + '_original')
       } catch (error) {
         console.error(error)
